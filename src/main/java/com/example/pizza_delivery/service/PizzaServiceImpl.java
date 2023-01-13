@@ -36,7 +36,7 @@ public class PizzaServiceImpl implements PizzaService {
     @Override
     @Transactional(readOnly = true)
     public PizzaEntity getPizzaById(Integer id) {
-        return pizzaEntityRepository.findById(id).orElse(null);
+        return pizzaEntityRepository.findById(id).orElseThrow(null);
     }
 
     @Override

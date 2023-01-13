@@ -32,6 +32,6 @@ public class IngredientServiceImpl implements IngredientService {
     @Override
     @Transactional(readOnly = true)
     public IngredientEntity getIngredientById(Integer id) {
-        return ingredientEntityRepository.findById(id).orElse(null);
+        return ingredientEntityRepository.findById(id).orElseThrow(null);
     }
 }

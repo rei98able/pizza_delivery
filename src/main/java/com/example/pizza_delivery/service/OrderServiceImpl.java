@@ -32,7 +32,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional(readOnly = true)
     public OrderEntity getOrderById(Integer id) {
-        return orderEntityRepository.findById(id).orElse(null);
+        return orderEntityRepository.findById(id).orElseThrow(null);
     }
 
     @Override
