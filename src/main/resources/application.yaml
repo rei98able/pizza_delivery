@@ -1,1 +1,29 @@
-
+spring:
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/pizzaDB
+    username: pizzaRoot
+    password: pizzaRootPass
+    driverClassName: org.postgresql.Driver
+  app:
+    name: PizzaApp
+    version: 1.0.0
+    description: PizzaApp
+    api:
+      version: 1.0.0
+      description: PizzaApp
+      title: PizzaApp
+      contact:
+        name: PizzaApp
+        author: ogbozoyan
+        email: oganes.bozoyan@mail.ru
+        swager:
+          enabled: true
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
