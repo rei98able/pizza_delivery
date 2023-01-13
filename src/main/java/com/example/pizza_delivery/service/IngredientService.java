@@ -9,6 +9,8 @@ import io.swagger.models.auth.In;
  */
 public interface IngredientService {
     IngredientEntity save(IngredientEntity ingredientEntity);
+
     void delete(Integer id);
-    IngredientService getIngredientById(Integer id);
+
+    IngredientEntity getIngredientById(Integer id);
 }

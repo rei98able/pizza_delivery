@@ -24,13 +24,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public void delete(Integer id) {
-        try {
-            orderEntityRepository.deleteById(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        orderEntityRepository.deleteById(id);
     }
 
     @Override

@@ -14,7 +14,7 @@ import java.util.Optional;
  */
 @Service
 @RequiredArgsConstructor
-public class OrderLPizzaServiceImpl implements OrderLPizzaService{
+public class OrderLPizzaServiceImpl implements OrderLPizzaService {
     private final OrderLPizzaEntityRepository orderLPizzaEntityRepository;
 
     @Override
@@ -40,11 +40,13 @@ public class OrderLPizzaServiceImpl implements OrderLPizzaService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public OrderLPizzaEntity getOrderLPizzaByOrder(Integer id) {
         return orderLPizzaEntityRepository.findByOrder(id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public OrderLPizzaEntity getOrderLPizzaByPizza(Integer id) {
         return orderLPizzaEntityRepository.findByPizza(id);
     }

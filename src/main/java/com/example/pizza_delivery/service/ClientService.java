@@ -10,7 +10,10 @@ import java.util.Optional;
  */
 public interface ClientService {
     Optional<ClientEntity> getClientById(Integer id);
+
     ClientEntity getClientByEmail(String phone);
+
     ClientEntity save(ClientEntity clientEntity);
+
     void delete(Integer id);
 }

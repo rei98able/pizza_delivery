@@ -36,12 +36,8 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public void delete(Integer id) {
-        try {
-            clientEntityRepository.deleteById(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        clientEntityRepository.deleteById(id);
     }
 }

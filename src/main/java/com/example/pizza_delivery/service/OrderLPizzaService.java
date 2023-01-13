@@ -10,9 +10,13 @@ import java.util.Optional;
  */
 public interface OrderLPizzaService {
     OrderLPizzaEntity save(OrderLPizzaEntity orderEntity);
+
     void delete(Integer id);
+
     Optional<OrderLPizzaEntity> getOrderLPizzaById(Integer id);
+
     OrderLPizzaEntity getOrderLPizzaByOrder(Integer id);
+
     OrderLPizzaEntity getOrderLPizzaByPizza(Integer id);
 }
 

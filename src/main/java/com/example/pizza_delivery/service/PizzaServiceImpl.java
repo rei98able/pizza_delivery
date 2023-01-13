@@ -15,11 +15,12 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @RequiredArgsConstructor
-public class PizzaServiceImpl implements PizzaService{
+public class PizzaServiceImpl implements PizzaService {
     private final PizzaEntityRepository pizzaEntityRepository;
     private final OrderLPizzaEntityRepository orderLPizzaEntityRepository;
     private final IngredientEntityRepository ingredientEntityRepository;
     private final PizzaLIngredientEntityRepository pizzaLIngredientEntityRepository;
+
     @Override
     @Transactional(readOnly = true)
     public PizzaEntity save(PizzaEntity pizzaEntity) {
@@ -27,14 +28,11 @@ public class PizzaServiceImpl implements PizzaService{
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public void delete(Integer id) {
-        try{
-            pizzaEntityRepository.deleteById(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        pizzaEntityRepository.deleteById(id);
     }
+
     @Override
     @Transactional(readOnly = true)
     public PizzaEntity getPizzaById(Integer id) {
