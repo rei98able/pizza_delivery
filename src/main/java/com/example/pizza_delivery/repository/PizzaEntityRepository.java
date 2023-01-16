@@ -12,5 +12,5 @@ public interface PizzaEntityRepository extends JpaRepository<PizzaEntity, Intege
 
     PizzaEntity findByIngredient(Integer id);
 
-    PizzaEntity findByOrder(Integer id);
+    PizzaEntity findByZakaz(Integer id);
 }

@@ -2,6 +2,7 @@ package com.example.pizza_delivery.service;
 
 import com.example.pizza_delivery.model.ClientEntity;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -16,4 +17,8 @@ public interface ClientService {
     ClientEntity save(ClientEntity clientEntity);
 
     void delete(Integer id);
+
+    List<ClientEntity> getAllClients();
+
+    ClientEntity findByLogin(String userLogin);
 }

@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -30,7 +31,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public ClientEntity save(ClientEntity clientEntity) {
         return clientEntityRepository.save(clientEntity);
     }
@@ -39,5 +40,15 @@ public class ClientServiceImpl implements ClientService {
     @Transactional
     public void delete(Integer id) {
         clientEntityRepository.deleteById(id);
+    }
+
+    @Override
+    public List<ClientEntity> getAllClients() {
+        return clientEntityRepository.findAll();
+    }
+
+    @Override
+    public ClientEntity findByLogin(String userLogin) {
+        return clientEntityRepository.findByLogin(userLogin);
     }
 }

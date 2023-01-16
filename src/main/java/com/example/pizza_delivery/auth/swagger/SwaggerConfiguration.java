@@ -1,4 +1,4 @@
-package com.example.pizza_delivery.configuration;
+package com.example.pizza_delivery.auth.swagger;
 
 import lombok.Data;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

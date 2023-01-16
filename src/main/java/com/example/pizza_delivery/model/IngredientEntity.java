@@ -9,8 +9,8 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "ingredient")
@@ -28,11 +28,8 @@ public class IngredientEntity {
     @Type(type = "org.hibernate.type.TextType")
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "pizza_id")
-    private PizzaEntity pizzaEntity;
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private List<PizzaEntity> pizza = new ArrayList<>();
 
-    @OneToMany(mappedBy = "ingredientEntity")
-    private Set<PizzaEntity> pizzaEntities = new LinkedHashSet<>();
+
 }

@@ -1,4 +1,7 @@
 spring:
+  security:
+    basic:
+      enabled: false
   jpa:
     database: POSTGRESQL
     show-sql: true
@@ -27,3 +30,5 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
+jwt:
+  secret: tokenSecret

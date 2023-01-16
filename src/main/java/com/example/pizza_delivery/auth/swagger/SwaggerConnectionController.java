@@ -1,5 +1,5 @@
 
-package com.example.pizza_delivery.controller;
+package com.example.pizza_delivery.auth.swagger;
 
 /**
  * Created by ogbozoyan at 13.01.2023

@@ -2,9 +2,7 @@ package com.example.pizza_delivery.service;
 
 import com.example.pizza_delivery.model.PizzaEntity;
 import com.example.pizza_delivery.repository.IngredientEntityRepository;
-import com.example.pizza_delivery.repository.OrderLPizzaEntityRepository;
 import com.example.pizza_delivery.repository.PizzaEntityRepository;
-import com.example.pizza_delivery.repository.PizzaLIngredientEntityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,9 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class PizzaServiceImpl implements PizzaService {
     private final PizzaEntityRepository pizzaEntityRepository;
-    private final OrderLPizzaEntityRepository orderLPizzaEntityRepository;
     private final IngredientEntityRepository ingredientEntityRepository;
-    private final PizzaLIngredientEntityRepository pizzaLIngredientEntityRepository;
 
     @Override
     @Transactional(readOnly = true)
@@ -36,7 +32,7 @@ public class PizzaServiceImpl implements PizzaService {
     @Override
     @Transactional(readOnly = true)
     public PizzaEntity getPizzaById(Integer id) {
-        return pizzaEntityRepository.findById(id).orElseThrow(null);
+        return pizzaEntityRepository.findById(id).orElseThrow();
     }
 
     @Override
@@ -59,7 +55,7 @@ public class PizzaServiceImpl implements PizzaService {
 
     @Override
     @Transactional(readOnly = true)
-    public PizzaEntity getPizzaByOrder(Integer id) {
-        return pizzaEntityRepository.findByOrder(id);
+    public PizzaEntity getPizzaByZakaz(Integer id) {
+        return pizzaEntityRepository.findByZakaz(id);
     }
 }

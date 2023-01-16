@@ -20,5 +20,5 @@ public interface PizzaService {
 
     PizzaEntity getPizzaByIngredient(Integer id);
 
-    PizzaEntity getPizzaByOrder(Integer id);
+    PizzaEntity getPizzaByZakaz(Integer id);
 }
