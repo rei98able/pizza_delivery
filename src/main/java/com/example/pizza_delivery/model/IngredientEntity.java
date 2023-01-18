@@ -25,10 +25,9 @@ public class IngredientEntity {
     private Integer id;
 
     @Column(name = "name", nullable = false)
-    @Type(type = "org.hibernate.type.TextType")
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<PizzaEntity> pizza = new ArrayList<>();
 
 

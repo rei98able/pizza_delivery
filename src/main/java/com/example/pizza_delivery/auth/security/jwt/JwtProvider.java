@@ -1,11 +1,10 @@
 package com.example.pizza_delivery.auth.security.jwt;
 
-import com.example.pizza_delivery.auth.security.ClientPrinciple;
+import com.example.pizza_delivery.auth.security.service.CustomUserDetails;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import io.jsonwebtoken.*;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -25,19 +24,23 @@ public class JwtProvider {
     @Value("${jwt.secret}")
     private String JWT_SIGN_SECRET;
 
-    public String generateJwtToken(Authentication authentication) {
-        ClientPrinciple clientPrinciple = (ClientPrinciple) authentication.getPrincipal();
+    public String generateJwtToken(
+            Authentication authentication
+    ) {
+        CustomUserDetails clientDetails = (CustomUserDetails) authentication.getPrincipal();
 
         int jwtExpiration = 1000000000;
         return Jwts.builder()
-                .setSubject((clientPrinciple.getUsername()))
+                .setSubject((clientDetails.getUsername()))
                 .setIssuedAt(Date.from(Instant.now()))
                 .setExpiration(Date.from(Instant.now().plus(jwtExpiration, HOURS)))
                 .signWith(SignatureAlgorithm.HS512, JWT_SIGN_SECRET)
                 .compact();
     }
 
-    public boolean validateToken(String token) {
+    public boolean validateToken(
+            String token
+    ) {
         try {
             Jwts.parser().setSigningKey(JWT_SIGN_SECRET).parseClaimsJws(token);
             return true;
@@ -53,12 +56,16 @@ public class JwtProvider {
         return false;
     }
 
-    public String getLoginFromToken(String token) {
+    public String getLoginFromToken(
+            String token
+    ) {
         Claims claims = Jwts.parser().setSigningKey(JWT_SIGN_SECRET).parseClaimsJws(token).getBody();
         return claims.getSubject();
     }
 
-    private String toJsonString(Serializable object) {
+    private String toJsonString(
+            Serializable object
+    ) {
         ObjectWriter writer = new ObjectMapper().writer();
         try {
             return writer.writeValueAsString(object);

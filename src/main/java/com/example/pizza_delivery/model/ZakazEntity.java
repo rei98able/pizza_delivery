@@ -23,19 +23,19 @@ public class ZakazEntity {
     @Column(name = "status")
     private String status;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "city_id",referencedColumnName = "id")
+    @JoinColumn(name = "city_id", referencedColumnName = "id")
     @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     private CityEntity city;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "client_id",referencedColumnName = "id")
+    @JoinColumn(name = "client_id", referencedColumnName = "id")
     private ClientEntity client;
 
-    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "zakaz_pizza",
-            joinColumns = @JoinColumn(name = "zakaz_id"),
-            inverseJoinColumns = @JoinColumn(name = "pizza_id")
+            joinColumns = @JoinColumn(name = "zakaz_id", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "pizza_id", referencedColumnName = "ID")
     )
     private List<PizzaEntity> pizza = new ArrayList<>();
 

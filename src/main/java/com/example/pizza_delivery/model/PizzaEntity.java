@@ -25,16 +25,15 @@ public class PizzaEntity {
     private Integer id;
 
     @Column(name = "name", nullable = false, length = 50)
-    @Type(type = "org.hibernate.type.TextType")
     private String name;
 
     @Column(name = "price", nullable = false)
     private int price;
 
-    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ZakazEntity> zakaz = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "pizza_ingredient",
             joinColumns = @JoinColumn(name = "pizza_id"),

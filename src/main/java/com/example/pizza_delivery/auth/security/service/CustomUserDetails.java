@@ -1,4 +1,4 @@
-package com.example.pizza_delivery.auth.security;
+package com.example.pizza_delivery.auth.security.service;
 
 import com.example.pizza_delivery.model.ClientEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -17,10 +17,9 @@ import java.util.stream.Collectors;
  * github.com/ogbozoyan
  */
 @Data
-
 @Builder
 @NoArgsConstructor
-public class ClientPrinciple implements UserDetails {
+public class CustomUserDetails implements UserDetails {
     private static final long serialVersionUID = 1L;
     private Long id;
     private String login;
@@ -29,13 +28,21 @@ public class ClientPrinciple implements UserDetails {
     private String email;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public ClientPrinciple(Long id, String login, String email, String password , Collection<? extends GrantedAuthority> authorities) {
+
+    public CustomUserDetails(
+            Long id,
+            String login,
+            String email,
+            String password,
+            Collection<? extends GrantedAuthority> authorities
+    ) {
         this.id = id;
         this.login = login;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
     }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
@@ -50,16 +57,19 @@ public class ClientPrinciple implements UserDetails {
     public boolean isAccountNonExpired() {
         return true;
     }
+
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
+
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
+
     @Override
-    public boolean isEnabled(){
+    public boolean isEnabled() {
         return true;
     }
 
@@ -72,15 +82,17 @@ public class ClientPrinciple implements UserDetails {
             return false;
         }
 
-        ClientPrinciple user = (ClientPrinciple) o;
+        CustomUserDetails user = (CustomUserDetails) o;
         return Objects.equals(id, user.id);
     }
 
-    public static ClientPrinciple build(ClientEntity user) {
+    public static CustomUserDetails build(
+            ClientEntity user
+    ) {
         List<GrantedAuthority> authorities = user.getRoles().stream().map(role ->
                 new SimpleGrantedAuthority(role.getName())
         ).collect(Collectors.toList());
-        return new ClientPrinciple(
+        return new CustomUserDetails(
                 user.getId(),
                 user.getLogin(),
                 user.getEmail(),

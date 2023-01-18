@@ -1,4 +1,4 @@
-package com.example.pizza_delivery.auth.security;
+package com.example.pizza_delivery.auth.security.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +11,7 @@ import javax.persistence.*;
  * github.com/ogbozoyan
  */
 @Entity
-@Table(name = "system_r_role")
+@Table(name = "role")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,14 +21,8 @@ public class RoleEntity {
     @Column(name = "id")
     private Long id;
     @Basic
-    @Column(name = "icon")
-    private String icon;
-    @Basic
     @Column(name = "name")
     private String name;
-    @Basic
-    @Column(name = "code")
-    private String code;
 }
 
 

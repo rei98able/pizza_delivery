@@ -1,9 +1,8 @@
 package com.example.pizza_delivery.auth.security.jwt;
 
-import com.example.pizza_delivery.auth.security.ClientUserDetails;
+import com.example.pizza_delivery.auth.security.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -32,18 +31,25 @@ public class JwtFilter extends OncePerRequestFilter {
     private JwtProvider jwtProvider;
 
     @Autowired
-    private ClientUserDetails clientUserDetails;
+    private CustomUserDetailsService customUserDetailsService;
 
     @Override
-    public void doFilterInternal(HttpServletRequest request,  HttpServletResponse response, FilterChain filterChain)
+    public void doFilterInternal(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            FilterChain filterChain
+    )
             throws IOException, ServletException {
 
-        String token = getTokenFromRequest(request);
+        String token = getToken(request);
         if (token != null && jwtProvider.validateToken(token)) {
             String userLogin = jwtProvider.getLoginFromToken(token);
-            UserDetails userDetails = clientUserDetails.loadUserByUsername(userLogin);
-            UsernamePasswordAuthenticationToken authentication
-                    = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+            UserDetails userDetails = customUserDetailsService.loadUserByUsername(userLogin);
+            UsernamePasswordAuthenticationToken authentication =
+                    new UsernamePasswordAuthenticationToken(
+                            userDetails,
+                            null,
+                            userDetails.getAuthorities());
             authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -53,7 +59,9 @@ public class JwtFilter extends OncePerRequestFilter {
 
     }
 
-    private String getTokenFromRequest(HttpServletRequest request) {
+    private String getToken(
+            HttpServletRequest request
+    ) {
         String bearer = request.getHeader(AUTHORIZATION);
         if (hasText(bearer) && bearer.startsWith("Bearer ")) {
             return bearer.substring(7);

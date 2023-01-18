@@ -21,4 +21,8 @@ public interface ClientService {
     List<ClientEntity> getAllClients();
 
     ClientEntity findByLogin(String userLogin);
+
+    ClientEntity findByEmail(String email);
+
+    Boolean exist(String login, String email);
 }

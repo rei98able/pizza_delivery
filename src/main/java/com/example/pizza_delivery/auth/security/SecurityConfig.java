@@ -1,6 +1,7 @@
 package com.example.pizza_delivery.auth.security;
 
 import com.example.pizza_delivery.auth.security.jwt.JwtFilter;
+import com.example.pizza_delivery.auth.security.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,8 +28,6 @@ import java.util.List;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtFilter jwtFilter;
-    @Autowired
-    ClientUserDetails clientUserDetails;
     private static final String[] AUTH_WHITELIST = {
             "/v2/api-docs",
             "/v3/api-docs",
@@ -44,13 +43,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/api/**",
             "/camunda-welcome",
     };
+
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
+
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(
+            HttpSecurity http
+    ) throws Exception {
         http
                 .httpBasic().disable()
                 .csrf().disable()
@@ -63,10 +66,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         http.cors();
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         final CorsConfiguration configuration = new CorsConfiguration();

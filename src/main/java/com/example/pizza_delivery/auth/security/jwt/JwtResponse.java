@@ -13,7 +13,8 @@ import org.springframework.stereotype.Component;
 public class JwtResponse {
     private String tokenType = "Bearer";
     private String accessToken;
-    public JwtResponse(){
+
+    public JwtResponse() {
     }
     public JwtResponse(String accessToken) {
         this.accessToken = accessToken;

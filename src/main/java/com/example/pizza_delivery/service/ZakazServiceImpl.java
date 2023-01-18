@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class ZakazServiceImpl implements ZakazService {
     private final ZakazEntityRepository zakazEntityRepository;
+
     @Override
     @Transactional(readOnly = true)
     public ZakazEntity save(ZakazEntity zakazEntity) {

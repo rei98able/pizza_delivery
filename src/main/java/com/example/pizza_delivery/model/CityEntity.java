@@ -18,9 +18,9 @@ public class CityEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "name", nullable = false,length = 50)
+    @Column(name = "name", nullable = false, length = 50)
     private String name;
 
-    @OneToOne(mappedBy = "city",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "city", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private ZakazEntity zakazEntity;
 }

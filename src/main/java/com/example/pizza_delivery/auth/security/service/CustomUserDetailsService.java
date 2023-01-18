@@ -1,7 +1,8 @@
-package com.example.pizza_delivery.auth.security;
+package com.example.pizza_delivery.auth.security.service;
 
 import com.example.pizza_delivery.model.ClientEntity;
 import com.example.pizza_delivery.service.ClientService;
+import com.example.pizza_delivery.service.ClientServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,16 +17,19 @@ import javax.transaction.Transactional;
  * github.com/ogbozoyan
  */
 @Component
-public class ClientUserDetails implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
-    private ClientService clientService;
+    private ClientServiceImpl clientService;
+
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String userLogin) throws UsernameNotFoundException {
-        try{
+    public UserDetails loadUserByUsername(
+            String userLogin
+    ) throws UsernameNotFoundException {
+        try {
             ClientEntity client = clientService.findByLogin(userLogin);
-            return ClientPrinciple.build(client);
-        }catch (EntityNotFoundException e){
+            return CustomUserDetails.build(client);
+        } catch (EntityNotFoundException e) {
             throw new UsernameNotFoundException("User not found with login: " + userLogin);
         }
     }
