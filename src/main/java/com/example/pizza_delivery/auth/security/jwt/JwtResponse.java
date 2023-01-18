@@ -12,11 +12,13 @@ import org.springframework.stereotype.Component;
 @Data
 public class JwtResponse {
     private String tokenType = "Bearer";
+    private String login;
     private String accessToken;
 
     public JwtResponse() {
     }
-    public JwtResponse(String accessToken) {
+    public JwtResponse(String accessToken,String login) {
         this.accessToken = accessToken;
+        this.login = login;
     }
 }

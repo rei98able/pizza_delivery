@@ -1,11 +1,9 @@
 package com.example.pizza_delivery.dto;
 
-import com.example.pizza_delivery.auth.security.service.RoleEntity;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 import java.util.Set;
 
 /**
@@ -14,8 +12,16 @@ import java.util.Set;
  */
 @Data
 public class SignUpDTO {
+    @NotBlank
+    @Size(min = 3, max = 20)
+    @Pattern(regexp = "^[a-zA-Z0-9]+$")
     private String login;
+    @NotBlank
+    @Size(min = 8)
+    @Pattern(regexp = "^[a-zA-Z0-9[!@#$%^&*]]+$")
     private String password;
+    @Email
+    @NotBlank
     private String email;
     @Override
     public String toString() {

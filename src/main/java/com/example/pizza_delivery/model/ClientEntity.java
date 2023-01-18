@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -36,6 +37,7 @@ public class ClientEntity {
     @Column(name = "email", nullable = false, unique = true, length = 256)
     @Type(type = "org.hibernate.type.TextType")
     private String email;
+
 
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ZakazEntity> zakazEntity = new ArrayList<>();

@@ -22,6 +22,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/auth")
@@ -34,7 +36,7 @@ public class AuthController {
     private final ClientServiceImpl clientService;
 
     @PostMapping("/signin")
-    public ResponseEntity<JwtResponse> login(@RequestBody LoginDTO loginDTO) {
+    public ResponseEntity<JwtResponse> login(@Valid @RequestBody LoginDTO loginDTO) {
         try {
             String trimmedLoginInLowerCase = loginDTO.getLogin().trim();
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
@@ -45,7 +47,9 @@ public class AuthController {
             log.info(authToken.getAuthorities().toString());
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String jwtToken = jwtProvider.generateJwtToken(authentication);
-            return ResponseEntity.ok(new JwtResponse(jwtToken));
+            log.info(jwtToken);
+            String login = jwtProvider.getLoginFromToken(jwtToken);
+            return ResponseEntity.ok(new JwtResponse(jwtToken,login));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().build();
@@ -53,10 +57,10 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<ClientEntity> signUp(@RequestBody SignUpDTO signUpDTO) {
+    public ResponseEntity<ClientEntity> signUp(@Valid @RequestBody SignUpDTO signUpDTO) {
         log.info(signUpDTO.toString());
         if (clientService.exist(signUpDTO.getLogin(), signUpDTO.getEmail())) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.status(409).build();
         }
         return ResponseEntity.ok(clientService.signUp(signUpDTO));
     }

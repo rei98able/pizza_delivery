@@ -22,10 +22,6 @@ public class ZakazEntity {
     private Long id;
     @Column(name = "status")
     private String status;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "city_id", referencedColumnName = "id")
-    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
-    private CityEntity city;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id", referencedColumnName = "id")
@@ -38,5 +34,11 @@ public class ZakazEntity {
             inverseJoinColumns = @JoinColumn(name = "pizza_id", referencedColumnName = "ID")
     )
     private List<PizzaEntity> pizza = new ArrayList<>();
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "address")
+    private String address;
 
 }
