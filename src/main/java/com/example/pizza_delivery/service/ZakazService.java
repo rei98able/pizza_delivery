@@ -13,9 +13,4 @@ public interface ZakazService {
 
     ZakazEntity getZakazById(Integer id);
 
-    ZakazEntity getZakazByClient(Integer id);
-
-    ZakazEntity getZakazByPizza(Integer id);
-
-    ZakazEntity getZakazByClientAndPizza(Integer clientId, Integer pizzaId);
 }

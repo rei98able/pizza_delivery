@@ -23,17 +23,13 @@ public class ZakazEntity {
     @Column(name = "status")
     private String status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "client_id", referencedColumnName = "id")
-    private ClientEntity client;
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "zakaz_pizza",
             joinColumns = @JoinColumn(name = "zakaz_id", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "pizza_id", referencedColumnName = "ID")
     )
-    private List<PizzaEntity> pizza = new ArrayList<>();
+    private List<PizzaEntity> pizza;
 
     @Column(name = "name")
     private String name;

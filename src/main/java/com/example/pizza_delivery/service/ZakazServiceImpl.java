@@ -33,23 +33,5 @@ public class ZakazServiceImpl implements ZakazService {
     public ZakazEntity getZakazById(Integer id) {
         return zakazEntityRepository.findById(id).orElseThrow();
     }
-
-    @Override
-    @Transactional(readOnly = true)
-    public ZakazEntity getZakazByClient(Integer id) {
-        return zakazEntityRepository.findByClient(id);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public ZakazEntity getZakazByPizza(Integer id) {
-        return zakazEntityRepository.findByPizza(id);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public ZakazEntity getZakazByClientAndPizza(Integer clientId, Integer pizzaId) {
-        return zakazEntityRepository.findByClientAndPizza(clientId, pizzaId);
-    }
 }
 

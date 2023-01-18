@@ -30,14 +30,12 @@ public class PizzaEntity {
     @Column(name = "price", nullable = false)
     private int price;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<ZakazEntity> zakaz = new ArrayList<>();
-
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "pizza_ingredient",
             joinColumns = @JoinColumn(name = "pizza_id"),
             inverseJoinColumns = @JoinColumn(name = "ingredient_id")
     )
-    private List<IngredientEntity> ingredient = new ArrayList<>();
+    private List<IngredientEntity> ingredient;
+
 }

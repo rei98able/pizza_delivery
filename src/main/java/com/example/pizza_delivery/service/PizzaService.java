@@ -12,13 +12,4 @@ public interface PizzaService {
 
     void delete(Integer id);
 
-    PizzaEntity getPizzaById(Integer id);
-
-    PizzaEntity getPizzaByName(String name);
-
-    PizzaEntity getPizzaByPrice(Integer price);
-
-    PizzaEntity getPizzaByIngredient(Integer id);
-
-    PizzaEntity getPizzaByZakaz(Integer id);
 }

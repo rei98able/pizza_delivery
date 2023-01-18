@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -42,7 +43,6 @@ public class AuthController {
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                     trimmedLoginInLowerCase,
                     loginDTO.getPassword());
-            log.info(authToken.toString());
             Authentication authentication = authenticationManager.authenticate(authToken);
             log.info(authToken.getAuthorities().toString());
             SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -50,6 +50,9 @@ public class AuthController {
             log.info(jwtToken);
             String login = jwtProvider.getLoginFromToken(jwtToken);
             return ResponseEntity.ok(new JwtResponse(jwtToken,login));
+        } catch (InternalAuthenticationServiceException e){
+            log.info("InternalAuthenticationServiceException| user dont exist?");
+            return ResponseEntity.status(400).build();
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().build();

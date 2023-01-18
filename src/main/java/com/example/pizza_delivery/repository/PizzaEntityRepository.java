@@ -7,10 +7,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PizzaEntityRepository extends JpaRepository<PizzaEntity, Integer> {
     PizzaEntity findByName(String name);
-
-    PizzaEntity findByPrice(Integer price);
-
-    PizzaEntity findByIngredient(Integer id);
-
-    PizzaEntity findByZakaz(Integer id);
 }

@@ -26,9 +26,4 @@ public class IngredientEntity {
 
     @Column(name = "name", nullable = false)
     private String name;
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<PizzaEntity> pizza = new ArrayList<>();
-
-
 }

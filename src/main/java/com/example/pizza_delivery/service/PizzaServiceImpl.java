@@ -29,33 +29,4 @@ public class PizzaServiceImpl implements PizzaService {
         pizzaEntityRepository.deleteById(id);
     }
 
-    @Override
-    @Transactional(readOnly = true)
-    public PizzaEntity getPizzaById(Integer id) {
-        return pizzaEntityRepository.findById(id).orElseThrow();
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public PizzaEntity getPizzaByName(String name) {
-        return pizzaEntityRepository.findByName(name);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public PizzaEntity getPizzaByPrice(Integer price) {
-        return pizzaEntityRepository.findByPrice(price);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public PizzaEntity getPizzaByIngredient(Integer id) {
-        return pizzaEntityRepository.findByIngredient(id);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public PizzaEntity getPizzaByZakaz(Integer id) {
-        return pizzaEntityRepository.findByZakaz(id);
-    }
 }

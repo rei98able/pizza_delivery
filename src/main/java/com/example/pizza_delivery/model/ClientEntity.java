@@ -39,8 +39,13 @@ public class ClientEntity {
     private String email;
 
 
-    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<ZakazEntity> zakazEntity = new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "client_zakaz",
+            joinColumns = @JoinColumn(name = "client_id", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "zakaz_id", referencedColumnName = "ID")
+    )
+    private List<ZakazEntity> zakazEntity;
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(
