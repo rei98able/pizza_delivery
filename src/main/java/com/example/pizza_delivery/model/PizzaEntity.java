@@ -37,5 +37,12 @@ public class PizzaEntity {
             inverseJoinColumns = @JoinColumn(name = "ingredient_id")
     )
     private List<IngredientEntity> ingredient;
+    public void addIngredient(IngredientEntity ingredientEntity) {
+        this.ingredient.add(ingredientEntity);
 
+    }
+
+    public void setIngredient(List<IngredientEntity> ingredient) {
+        this.ingredient = ingredient;
+    }
 }

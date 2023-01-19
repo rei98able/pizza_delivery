@@ -1,5 +1,6 @@
 package com.example.pizza_delivery.service;
 
+import com.example.pizza_delivery.dto.PizzaDTO;
 import com.example.pizza_delivery.model.PizzaEntity;
 
 /**
@@ -12,4 +13,6 @@ public interface PizzaService {
 
     void delete(Integer id);
 
+    PizzaEntity newPizza(PizzaDTO pizzaDTO);
+    PizzaEntity updatePizza(PizzaDTO pizzaDTO);
 }

@@ -1,9 +1,7 @@
 package com.example.pizza_delivery.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.example.pizza_delivery.dto.IngredientDTO;
+import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Type;
@@ -18,6 +16,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class IngredientEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,4 +27,10 @@ public class IngredientEntity {
     private String label;
     @Column(name="value",nullable = false)
     private String value;
+
+
+    public IngredientEntity(IngredientDTO ingredientDTO) {
+        this.label = ingredientDTO.getLabel();
+        this.value = ingredientDTO.getValue();
+    }
 }
