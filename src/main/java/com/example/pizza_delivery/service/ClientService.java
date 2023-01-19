@@ -17,6 +17,7 @@ public interface ClientService {
     ClientEntity save(ClientEntity clientEntity);
 
     void delete(Integer id);
+    void deleteByLogin(String login);
 
     List<ClientEntity> getAllClients();
 
@@ -25,4 +26,8 @@ public interface ClientService {
     ClientEntity findByEmail(String email);
 
     Boolean exist(String login, String email);
+
+    ClientEntity update(String login);
+
+    ClientEntity getCurrent();
 }

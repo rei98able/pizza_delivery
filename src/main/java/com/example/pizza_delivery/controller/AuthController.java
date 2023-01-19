@@ -32,9 +32,9 @@ import javax.validation.Valid;
 @Slf4j
 public class AuthController {
     private final CustomUserDetailsService customUserDetailsService;
+    private final ClientServiceImpl clientService;
     private final AuthenticationManager authenticationManager;
     private final JwtProvider jwtProvider;
-    private final ClientServiceImpl clientService;
 
     @PostMapping("/signin")
     public ResponseEntity<JwtResponse> login(@Valid @RequestBody LoginDTO loginDTO) {

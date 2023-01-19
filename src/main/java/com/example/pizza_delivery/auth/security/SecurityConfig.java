@@ -23,7 +23,9 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
-        prePostEnabled = true
+        prePostEnabled = true,
+        securedEnabled = true,
+        jsr250Enabled = true
 )
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
@@ -40,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/lib/**",
             "/engine-rest/**",
             "/camunda/**",
-            "/api/**",
+            "/api/auth/**",
             "/camunda-welcome",
     };
 

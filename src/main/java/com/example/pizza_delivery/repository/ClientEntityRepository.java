@@ -13,4 +13,6 @@ public interface ClientEntityRepository extends JpaRepository<ClientEntity, Inte
     Boolean existsByEmail(String email);
 
     Boolean existsByLogin(String login);
+
+    void deleteByLogin(String login);
 }

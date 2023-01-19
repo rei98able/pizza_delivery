@@ -24,6 +24,8 @@ public class IngredientEntity {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "label", nullable = false)
+    private String label;
+    @Column(name="value",nullable = false)
+    private String value;
 }

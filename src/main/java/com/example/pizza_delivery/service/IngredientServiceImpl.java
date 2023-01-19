@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by ogbozoyan at 13.01.2023
  * github.com/ogbozoyan
@@ -18,7 +20,7 @@ public class IngredientServiceImpl implements IngredientService {
     private final PizzaEntityRepository pizzaEntityRepository;
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public IngredientEntity save(IngredientEntity ingredientEntity) {
         return ingredientEntityRepository.save(ingredientEntity);
     }
@@ -33,5 +35,9 @@ public class IngredientServiceImpl implements IngredientService {
     @Transactional(readOnly = true)
     public IngredientEntity getIngredientById(Integer id) {
         return ingredientEntityRepository.findById(id).orElseThrow();
+    }
+    @Transactional(readOnly = true)
+    public List<IngredientEntity> getAll(){
+        return ingredientEntityRepository.findAll();
     }
 }

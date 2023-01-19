@@ -52,7 +52,7 @@ public class ClientEntity {
             name = "system_l_role_access",
             joinColumns = @JoinColumn(name = "r_user_id"),
             inverseJoinColumns = @JoinColumn(name = "r_role_id"))
-    Set<RoleEntity> roles = new HashSet<>();
+    Set<RoleEntity> roles;
 
     public void addZakaz(ZakazEntity zakazEntity) {
         this.zakazEntity.add(zakazEntity);
