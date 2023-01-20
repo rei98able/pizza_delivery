@@ -10,13 +10,12 @@ import java.util.Optional;
  * github.com/ogbozoyan
  */
 public interface ClientService {
-    Optional<ClientEntity> getClientById(Integer id);
 
     ClientEntity getClientByEmail(String phone);
 
     ClientEntity save(ClientEntity clientEntity);
 
-    void delete(Integer id);
+    void delete(Long id);
     void deleteByLogin(String login);
 
     List<ClientEntity> getAllClients();
@@ -27,7 +26,9 @@ public interface ClientService {
 
     Boolean exist(String login, String email);
 
-    ClientEntity update(String login);
-
     ClientEntity getCurrent();
+
+    ClientEntity findById(Long id);
+
+    ClientEntity createbyadmin(ClientEntity clientDTO);
 }

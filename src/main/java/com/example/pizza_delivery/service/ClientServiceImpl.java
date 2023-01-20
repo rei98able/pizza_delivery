@@ -5,7 +5,6 @@ import com.example.pizza_delivery.auth.security.service.RoleEntity;
 import com.example.pizza_delivery.dto.SignUpDTO;
 import com.example.pizza_delivery.model.ClientEntity;
 import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import com.example.pizza_delivery.repository.ClientEntityRepository;
@@ -30,8 +29,17 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<ClientEntity> getClientById(Integer id) {
+    public ClientEntity findById(Long id) {
         return clientEntityRepository.findById(id);
+    }
+
+    @Override
+    public ClientEntity createbyadmin(ClientEntity clientDTO) {
+        Set<RoleEntity> role = new HashSet<>();
+        role.add(roleEntityRepository.findByName("ROLE_CLIENT"));
+        clientDTO.setRoles(role);
+        clientDTO.setPassword(passwordEncoder.encode(clientDTO.getPassword()));
+        return clientEntityRepository.save(clientDTO);
     }
 
     @Override
@@ -60,8 +68,14 @@ public class ClientServiceImpl implements ClientService {
     }
     @Override
     @Transactional
-    public void delete(Integer id) {
-        clientEntityRepository.deleteById(id);
+    public void delete(Long id) {
+        ClientEntity Cur  = getCurrent();
+        if (Cur.getId().equals(id)) {
+            return;
+        }
+        else {
+            clientEntityRepository.deleteById(id);
+        }
     }
     @Override
     @Transactional
@@ -89,18 +103,7 @@ public class ClientServiceImpl implements ClientService {
     @Override
     @Transactional(readOnly = true)
     public Boolean exist(String login, String email) {
-        if (clientEntityRepository.existsByLogin(login) || clientEntityRepository.existsByEmail(email)) {
-            return true;
-        } else
-            return false;
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public ClientEntity update(String login) {
-        ClientEntity clientEntity = clientEntityRepository.findByLogin(login);
-        clientEntity.setLogin(login);
-        return clientEntityRepository.save(clientEntity);
+        return clientEntityRepository.existsByLogin(login) || clientEntityRepository.existsByEmail(email);
     }
 
     @SneakyThrows

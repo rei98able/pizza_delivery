@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ClientEntityRepository extends JpaRepository<ClientEntity, Integer> {
+    ClientEntity findById(Long id);
+    void deleteById(Long id);
     ClientEntity findByEmail(String email);
 
     ClientEntity findByLogin(String userLogin);

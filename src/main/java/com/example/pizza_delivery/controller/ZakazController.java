@@ -28,6 +28,7 @@ public class ZakazController {
     @PostMapping("/new")
     public void newOrder(@Valid ZakazDTO zakazDTO) {
         log.info("new order");
+
     }
 
 }
