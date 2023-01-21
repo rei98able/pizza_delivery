@@ -2,8 +2,8 @@ spring:
   security:
     basic:
       enabled: false
-  server:
-    address: 192.168.88.128
+  #server:
+    #address: 192.168.88.128
   main:
     allow-circular-references: true
   jpa:

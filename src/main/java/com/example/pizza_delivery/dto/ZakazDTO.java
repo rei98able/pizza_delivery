@@ -4,6 +4,7 @@ import com.example.pizza_delivery.model.PizzaEntity;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Data
 public class ZakazDTO {
@@ -11,7 +12,9 @@ public class ZakazDTO {
     private String address;
     @NotBlank
     private String name;
+    @NotBlank
+    private String login;
     private String status;
-    PizzaEntity pizzaEntity;
+    private List<String> pizzaName;
 
 }

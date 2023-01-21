@@ -1,6 +1,9 @@
 package com.example.pizza_delivery.service;
 
+import com.example.pizza_delivery.dto.ZakazDTO;
 import com.example.pizza_delivery.model.ZakazEntity;
+
+import java.util.List;
 
 /**
  * Created by ogbozoyan at 13.01.2023
@@ -13,4 +16,6 @@ public interface ZakazService {
 
     ZakazEntity getZakazById(Integer id);
 
+    ZakazEntity newOrder(ZakazDTO zakazDTO);
+    List<ZakazEntity> getAll();
 }

@@ -9,10 +9,12 @@ import com.example.pizza_delivery.model.PizzaEntity;
  */
 
 public interface PizzaService {
+
     PizzaEntity save(PizzaEntity pizzaEntity);
 
     void delete(Integer id);
 
     PizzaEntity newPizza(PizzaDTO pizzaDTO);
     PizzaEntity updatePizza(PizzaDTO pizzaDTO);
+    PizzaEntity getByName(String name);
 }

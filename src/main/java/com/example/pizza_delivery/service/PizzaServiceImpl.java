@@ -5,6 +5,7 @@ import com.example.pizza_delivery.model.IngredientEntity;
 import com.example.pizza_delivery.model.PizzaEntity;
 import com.example.pizza_delivery.repository.IngredientEntityRepository;
 import com.example.pizza_delivery.repository.PizzaEntityRepository;
+import io.swagger.models.auth.In;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,8 @@ import java.util.List;
 public class PizzaServiceImpl implements PizzaService {
     private final PizzaEntityRepository pizzaEntityRepository;
     private final IngredientEntityRepository ingredientEntityRepository;
+
+
 
     @Override
     @Transactional
@@ -62,6 +65,12 @@ public class PizzaServiceImpl implements PizzaService {
         pizzaEntity.setPrice(pizzaDTO.getPrice());
         pizzaEntity.setId(pizzaDTO.getId());
         return pizzaEntityRepository.save(pizzaEntity);
+    }
+
+   @Override
+   @Transactional(readOnly = true)
+   public PizzaEntity getByName(String name) {
+        return pizzaEntityRepository.findByName(name);
     }
 
 }
