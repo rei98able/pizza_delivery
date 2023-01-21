@@ -10,6 +10,10 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class IngredientDTO {
+
+
     private String label;
     private String value;
+    private String newLabel;
+    private String newValue;
 }

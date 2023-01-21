@@ -1,5 +1,6 @@
 package com.example.pizza_delivery.service;
 
+import com.example.pizza_delivery.dto.IngredientDTO;
 import com.example.pizza_delivery.model.IngredientEntity;
 import io.swagger.models.auth.In;
 
@@ -13,4 +14,6 @@ public interface IngredientService {
     void delete(Integer id);
 
     IngredientEntity getIngredientById(Integer id);
+
+    IngredientEntity update(IngredientDTO ingredientDTO);
 }

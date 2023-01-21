@@ -31,7 +31,7 @@ public class JwtProvider {
     ) {
         CustomUserDetails clientDetails = (CustomUserDetails) authentication.getPrincipal();
 
-        int jwtExpiration = 1000000000;
+        int jwtExpiration = 2;
         return Jwts.builder()
                 .setSubject((clientDetails.getUsername()))
                 .setIssuedAt(Date.from(Instant.now()))

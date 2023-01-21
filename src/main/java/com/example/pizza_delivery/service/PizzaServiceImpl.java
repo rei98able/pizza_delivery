@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,10 +41,16 @@ public class PizzaServiceImpl implements PizzaService {
     @Override
     @Transactional
     public PizzaEntity newPizza(PizzaDTO pizzaDTO){
+        List<IngredientEntity> ingredients = new ArrayList<>();
+
         PizzaEntity pizzaEntity = new PizzaEntity();
+
         pizzaEntity.setName(pizzaDTO.getName());
         pizzaEntity.setPrice(pizzaDTO.getPrice());
-        pizzaEntity.setIngredient(pizzaDTO.getIngredients().stream().map(IngredientEntity::new).toList());
+        for(IngredientEntity ingredientEntity : pizzaDTO.getIngredients()){
+            ingredients.add(ingredientEntityRepository.findByLabel(ingredientEntity.getLabel()));
+        }
+        pizzaEntity.setIngredient(ingredients);
         return pizzaEntityRepository.save(pizzaEntity);
     }
 

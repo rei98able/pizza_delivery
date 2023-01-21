@@ -1,5 +1,6 @@
 package com.example.pizza_delivery.service;
 
+import com.example.pizza_delivery.dto.IngredientDTO;
 import com.example.pizza_delivery.model.IngredientEntity;
 import com.example.pizza_delivery.repository.IngredientEntityRepository;
 import com.example.pizza_delivery.repository.PizzaEntityRepository;
@@ -36,6 +37,15 @@ public class IngredientServiceImpl implements IngredientService {
     public IngredientEntity getIngredientById(Integer id) {
         return ingredientEntityRepository.findById(id).orElseThrow();
     }
+
+    @Override
+    public IngredientEntity update(IngredientDTO ingredientDTO) {
+        IngredientEntity ingredient = ingredientEntityRepository.findByLabel(ingredientDTO.getLabel());
+        ingredient.setLabel(ingredientDTO.getNewLabel());
+        ingredient.setValue(ingredientDTO.getNewValue());
+        return ingredientEntityRepository.save(ingredient);
+    }
+
     @Transactional(readOnly = true)
     public List<IngredientEntity> getAll(){
         return ingredientEntityRepository.findAll();

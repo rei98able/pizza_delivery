@@ -13,4 +13,6 @@ public interface IngredientEntityRepository extends JpaRepository<IngredientEnti
 
     List<IngredientEntity> findAllByLabel(String label);
 
+    IngredientEntity findByLabel(String label);
+    IngredientEntity findByValue(String value);
 }

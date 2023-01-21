@@ -1,6 +1,7 @@
 package com.example.pizza_delivery.controller;
 
 import com.example.pizza_delivery.auth.security.jwt.JwtProvider;
+import com.example.pizza_delivery.dto.IngredientDTO;
 import com.example.pizza_delivery.model.IngredientEntity;
 import com.example.pizza_delivery.service.ClientServiceImpl;
 import com.example.pizza_delivery.service.IngredientServiceImpl;
@@ -45,8 +46,8 @@ public class IngredientController {
     }
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/update")
-    public void updateIngredient(@RequestBody IngredientEntity ingredientDTO) {
+    public void updateIngredient(@RequestBody IngredientDTO ingredientDTO) {
         log.info("update ingredient");
-        ingredientServiceImpl.save(ingredientDTO);
+        ingredientServiceImpl.update(ingredientDTO);
     }
 }
