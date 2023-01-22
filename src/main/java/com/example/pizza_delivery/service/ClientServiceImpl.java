@@ -43,6 +43,11 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
+    public List<ClientEntity> getAll() {
+        return clientEntityRepository.findAll();
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public ClientEntity getClientByEmail(String email) {
         return clientEntityRepository.findByEmail(email);
@@ -125,4 +130,5 @@ public class ClientServiceImpl implements ClientService {
             throw new Exception("UserService.getCurrentUser(): Ошибка получения данных о пользователе");
         }
     }
+
 }

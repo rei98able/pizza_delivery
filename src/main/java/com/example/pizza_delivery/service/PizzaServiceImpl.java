@@ -43,7 +43,7 @@ public class PizzaServiceImpl implements PizzaService {
     }
     @Override
     @Transactional
-    public PizzaEntity newPizza(PizzaDTO pizzaDTO){
+    public PizzaEntity newPizza(PizzaDTO pizzaDTO) throws Exception {
         List<IngredientEntity> ingredients = new ArrayList<>();
 
         PizzaEntity pizzaEntity = new PizzaEntity();
@@ -52,6 +52,11 @@ public class PizzaServiceImpl implements PizzaService {
         pizzaEntity.setPrice(pizzaDTO.getPrice());
         for(IngredientEntity ingredientEntity : pizzaDTO.getIngredients()){
             ingredients.add(ingredientEntityRepository.findByLabel(ingredientEntity.getLabel()));
+        }
+        System.out.println(ingredients);
+        if(ingredients.contains("null")||ingredients.contains(null))
+        {
+            throw new Exception("No ingredients found");
         }
         pizzaEntity.setIngredient(ingredients);
         return pizzaEntityRepository.save(pizzaEntity);

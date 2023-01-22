@@ -8,6 +8,7 @@ import com.example.pizza_delivery.service.PizzaServiceImpl;
 import com.example.pizza_delivery.service.ZakazServiceImpl;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +34,7 @@ public class PizzaController {
         return pizzaServiceImpl.getALL();
     }
 
+    @SneakyThrows
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/new")
     public PizzaEntity newPizza(@RequestBody PizzaDTO pizzaDTO) {

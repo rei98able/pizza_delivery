@@ -1,4 +1,15 @@
 spring:
+  mail:
+    host: smtp.yandex.ru
+    port: 465
+    username: login
+    password: idxemnzjlspxrvgc
+    properties:
+      mail:
+        smtp:
+          auth: true
+        starttls:
+            enable: true
   security:
     basic:
       enabled: false

@@ -13,5 +13,6 @@ public class PizzaDTO {
     private String name;
     @NotBlank
     private Integer price;
+    @NotBlank
     private List<IngredientEntity> ingredients;
 }

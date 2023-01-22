@@ -1,7 +1,8 @@
 package com.example.pizza_delivery.service;
 
-import com.example.pizza_delivery.auth.security.service.RoleEntity;
 import com.example.pizza_delivery.dto.ZakazDTO;
+import com.example.pizza_delivery.email.details.EmailDetails;
+import com.example.pizza_delivery.email.service.EmailServiceImpl;
 import com.example.pizza_delivery.model.ClientEntity;
 import com.example.pizza_delivery.model.PizzaEntity;
 import com.example.pizza_delivery.model.ZakazEntity;
@@ -26,6 +27,7 @@ public class ZakazServiceImpl implements ZakazService {
     private final ClientEntityRepository clientEntityRepository;
     private final ClientServiceImpl clientServiceImpl;
     private final PizzaServiceImpl pizzaServiceImpl;
+    private final EmailServiceImpl emailService;
 
 
     @Override
@@ -37,7 +39,19 @@ public class ZakazServiceImpl implements ZakazService {
     @Override
     @Transactional
     public void delete(Integer id) {
-        zakazEntityRepository.deleteById(id);
+        ClientEntity clientEntity = clientServiceImpl.getCurrent();
+        if(
+                clientEntity.getRoles().stream()
+                        .anyMatch(roleEntity -> roleEntity.getName().contains("ROLE_ADMIN"))
+                        ||
+                        clientEntity.getZakazEntity().stream()
+                        .map(ZakazEntity::getId).anyMatch(id::equals)
+        ) {
+            zakazEntityRepository.deleteById(id);
+        }
+        else {
+            throw new RuntimeException("You are not permitted to do this");
+        }
     }
 
     @Override
@@ -71,11 +85,17 @@ public class ZakazServiceImpl implements ZakazService {
                 pizzaEntities.add(pizzaServiceImpl.getByName(pizzaEntityName));
             }
             zakazEntity.setPizza(pizzaEntities);
-
             zakazEntity.setStatus(zakazDTO.getStatus());
             zakazEntityRepository.save(zakazEntity);
             clientEntity.addZakaz(zakazEntity);
             clientServiceImpl.save(clientEntity);
+
+            EmailDetails emailDetails = new EmailDetails();
+            emailDetails.setSubject("New order");
+            emailDetails.setText("New order from " + zakazDTO.getName() + " with address " + zakazDTO.getAddress());
+            emailDetails.setRecipient(clientServiceImpl.findByLogin(zakazDTO.getLogin()).getEmail());
+            emailDetails.setAttachment(null);
+           // emailService.sendMail(emailDetails); Не работает какого-то хуя впвадает в вечный цикл
             return zakazEntity;
         }
         else {

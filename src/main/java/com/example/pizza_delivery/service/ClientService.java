@@ -31,4 +31,6 @@ public interface ClientService {
     ClientEntity findById(Long id);
 
     ClientEntity createbyadmin(ClientEntity clientDTO);
+
+    List<ClientEntity> getAll();
 }

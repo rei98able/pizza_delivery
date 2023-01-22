@@ -14,7 +14,7 @@ public interface PizzaService {
 
     void delete(Integer id);
 
-    PizzaEntity newPizza(PizzaDTO pizzaDTO);
+    PizzaEntity newPizza(PizzaDTO pizzaDTO) throws Exception;
     PizzaEntity updatePizza(PizzaDTO pizzaDTO);
     PizzaEntity getByName(String name);
 }
