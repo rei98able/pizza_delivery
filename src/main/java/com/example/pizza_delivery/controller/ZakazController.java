@@ -1,12 +1,14 @@
 package com.example.pizza_delivery.controller;
 
 import com.example.pizza_delivery.dto.ZakazDTO;
+import com.example.pizza_delivery.dto.ZakazNewPizzaDTO;
 import com.example.pizza_delivery.model.ZakazEntity;
 import com.example.pizza_delivery.service.ClientServiceImpl;
 import com.example.pizza_delivery.service.IngredientServiceImpl;
 import com.example.pizza_delivery.service.PizzaServiceImpl;
 import com.example.pizza_delivery.service.ZakazServiceImpl;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -44,5 +46,14 @@ public class ZakazController {
         zakazServiceImpl.delete(id);
         return ResponseEntity.ok().build();
     }
+    @SneakyThrows
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CLIENT')")
+    @PostMapping("/newPizza")
+    public ResponseEntity<ZakazEntity> newPizza(@Valid @RequestBody ZakazNewPizzaDTO zakazDTO)
+    {
+        log.info("new pizza");
+        pizzaServiceImpl.newPizza(zakazDTO.getPizza());
 
+        return ResponseEntity.ok(zakazServiceImpl.newOrder(zakazDTO.getZakaz()));
+    }
 }
