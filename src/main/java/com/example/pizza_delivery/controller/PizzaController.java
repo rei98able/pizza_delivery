@@ -43,7 +43,7 @@ public class PizzaController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @DeleteMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public void deletePizza(@PathVariable Integer id) {
         log.info("delete pizza");
         pizzaServiceImpl.delete(id);

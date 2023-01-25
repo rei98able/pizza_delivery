@@ -40,7 +40,7 @@ public class ZakazController {
         return ResponseEntity.ok(zakazServiceImpl.newOrder(zakazDTO));
     }
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CLIENT')")
-    @DeleteMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id) {
         log.info("delete order");
         zakazServiceImpl.delete(id);

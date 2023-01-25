@@ -39,7 +39,7 @@ public class IngredientController {
         ingredientServiceImpl.save(ingredientDTO);
     }
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @DeleteMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public void deleteIngredient(@PathVariable Integer id) {
         log.info("delete ingredient");
         ingredientServiceImpl.delete(id);

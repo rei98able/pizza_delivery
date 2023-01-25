@@ -45,7 +45,7 @@ public class ClientController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @DeleteMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public ResponseEntity<?> deleteClient(@Valid @PathVariable Long id) {
         log.info("delete client");
         clientServiceImpl.delete(id);
