@@ -26,13 +26,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfiguration {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Сервисы ИНПП")
-                .description("Сервисы backend АРМ работы с ИННП")
-                //.license("")
+                .title("Пиццерия у Бебры")
+                .description("Сервисы backend АРМ работы с пиццерией")
                 .licenseUrl("http://unlicense.org")
                 .termsOfServiceUrl("")
                 .version("1.0.0")
-                //.contact(new Contact("", ""))
                 .build();
     }
 

@@ -8,6 +8,4 @@ import java.util.Optional;
 
 @Repository
 public interface ZakazEntityRepository extends JpaRepository<ZakazEntity, Integer> {
-
-    Optional<ZakazEntity> findById(Integer id);
 }

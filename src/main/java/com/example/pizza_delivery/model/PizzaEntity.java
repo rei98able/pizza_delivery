@@ -24,7 +24,7 @@ public class PizzaEntity {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "name", nullable = false, length = 50)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "price", nullable = false)
@@ -37,11 +37,6 @@ public class PizzaEntity {
             inverseJoinColumns = @JoinColumn(name = "ingredient_id")
     )
     private List<IngredientEntity> ingredient;
-    public void addIngredient(IngredientEntity ingredientEntity) {
-        this.ingredient.add(ingredientEntity);
-
-    }
-
     public void setIngredient(List<IngredientEntity> ingredient) {
         this.ingredient = ingredient;
     }

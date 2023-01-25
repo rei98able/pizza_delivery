@@ -28,9 +28,4 @@ public class IngredientEntity {
     @Column(name="value",nullable = false)
     private String value;
 
-
-    public IngredientEntity(IngredientDTO ingredientDTO) {
-        this.label = ingredientDTO.getLabel();
-        this.value = ingredientDTO.getValue();
-    }
 }

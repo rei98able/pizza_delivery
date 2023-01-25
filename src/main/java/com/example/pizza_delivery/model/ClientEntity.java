@@ -26,13 +26,12 @@ public class ClientEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "login", nullable = false, unique = true, length = 20)
+    @Column(name = "login", nullable = false)
     private String login;
     @Column(name = "password", nullable = false)
 
     private String password;
     @Column(name = "email", nullable = false, unique = true, length = 256)
-    @Type(type = "org.hibernate.type.TextType")
     private String email;
 
 

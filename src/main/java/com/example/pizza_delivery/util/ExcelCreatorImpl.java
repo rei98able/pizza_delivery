@@ -3,6 +3,7 @@ package com.example.pizza_delivery.util;
 import com.example.pizza_delivery.model.ClientEntity;
 import com.example.pizza_delivery.model.PizzaEntity;
 import com.example.pizza_delivery.model.ZakazEntity;
+import com.example.pizza_delivery.service.ClientServiceImpl;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Component;
 import javax.transaction.Transactional;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,14 +27,16 @@ import java.util.stream.Collectors;
 @Slf4j
 @Component
 public class ExcelCreatorImpl implements ExcelCreatorInterface {
-
+    private final ClientServiceImpl clientServiceImpl;
     @SneakyThrows
     @Override
     @Transactional
     public  String createExcel(
-            String fileName,
-            List<ClientEntity> clientEntities
     ) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy(HH:mm:ss)");
+        Date date = new Date();
+        String fileName = "Отчет " + formatter.format(date) + ".xlsx";
+        List<ClientEntity> clientEntities = clientServiceImpl.getAll();
         String sheetName = "Отчет по пользователю";
         Workbook workbook;
         String path = "src//main//resources//Excel";

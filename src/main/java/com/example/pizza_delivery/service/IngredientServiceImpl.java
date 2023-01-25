@@ -39,6 +39,7 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
+    @Transactional
     public IngredientEntity update(IngredientDTO ingredientDTO) {
         IngredientEntity ingredient = ingredientEntityRepository.findByLabel(ingredientDTO.getLabel());
         ingredient.setLabel(ingredientDTO.getNewLabel());

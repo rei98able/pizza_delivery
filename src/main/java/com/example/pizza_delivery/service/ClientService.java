@@ -1,6 +1,8 @@
 package com.example.pizza_delivery.service;
 
+import com.example.pizza_delivery.dto.ClientDTO;
 import com.example.pizza_delivery.model.ClientEntity;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,4 +35,5 @@ public interface ClientService {
     ClientEntity createbyadmin(ClientEntity clientDTO);
 
     List<ClientEntity> getAll();
+    ResponseEntity<ClientEntity> update(ClientDTO clientDTO);
 }

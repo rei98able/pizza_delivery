@@ -5,5 +5,5 @@ import com.example.pizza_delivery.model.ClientEntity;
 import java.util.List;
 
 public interface ExcelCreatorInterface {
-    String createExcel(String fileName, List<ClientEntity> object);
+    String createExcel();
 }

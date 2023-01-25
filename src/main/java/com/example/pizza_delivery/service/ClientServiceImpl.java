@@ -2,9 +2,12 @@ package com.example.pizza_delivery.service;
 
 import com.example.pizza_delivery.auth.security.service.CustomUserDetails;
 import com.example.pizza_delivery.auth.security.service.RoleEntity;
+import com.example.pizza_delivery.dto.ClientDTO;
 import com.example.pizza_delivery.dto.SignUpDTO;
 import com.example.pizza_delivery.model.ClientEntity;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import com.example.pizza_delivery.repository.ClientEntityRepository;
@@ -22,6 +25,7 @@ import java.util.*;
  */
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ClientServiceImpl implements ClientService {
     private final ClientEntityRepository clientEntityRepository;
     private final RoleEntityRepository roleEntityRepository;
@@ -34,6 +38,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
+    @Transactional
     public ClientEntity createbyadmin(ClientEntity clientDTO) {
         Set<RoleEntity> role = new HashSet<>();
         role.add(roleEntityRepository.findByName("ROLE_CLIENT"));
@@ -43,9 +48,11 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
+    @Transactional
     public List<ClientEntity> getAll() {
         return clientEntityRepository.findAll();
     }
+
 
     @Override
     @Transactional(readOnly = true)
@@ -129,6 +136,24 @@ public class ClientServiceImpl implements ClientService {
         } else {
             throw new Exception("UserService.getCurrentUser(): Ошибка получения данных о пользователе");
         }
+    }
+    @Override
+    public ResponseEntity<ClientEntity> update(ClientDTO clientDTO) {
+        ClientEntity old = getCurrent();
+        Optional<RoleEntity> adminRole = old.getRoles().stream()
+                .filter(roleEntity -> roleEntity.getName().equals("ROLE_ADMIN"))
+                .findAny();
+        if (old.getLogin().equals(clientDTO.getLogin())) {
+            log.info("update client");
+            old.setLogin(clientDTO.getNewLogin());
+            return ResponseEntity.ok(save(old));
+        } else if (adminRole.get().getName().equals("ROLE_ADMIN")) {
+            log.info("admin updating client");
+            ClientEntity clientNewCredits = findByLogin(clientDTO.getLogin());
+            clientNewCredits.setLogin(clientDTO.getNewLogin());
+            return ResponseEntity.ok(save(clientNewCredits));
+        }
+        return ResponseEntity.badRequest().build();
     }
 
 }

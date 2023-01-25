@@ -95,7 +95,7 @@ public class ZakazServiceImpl implements ZakazService {
             emailDetails.setText("New order from " + zakazDTO.getName() + " with address " + zakazDTO.getAddress());
             emailDetails.setRecipient(clientServiceImpl.findByLogin(zakazDTO.getLogin()).getEmail());
             emailDetails.setAttachment(null);
-            emailService.sendMail(emailDetails);
+            emailService.sendEmail(emailDetails);
             return zakazEntity;
         }
         else {

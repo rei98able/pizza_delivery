@@ -54,22 +54,7 @@ public class ClientController {
 
     @PutMapping("/update")
     public ResponseEntity<ClientEntity> update(@Valid @RequestBody ClientDTO clientDTO) {
-        ClientEntity old = clientServiceImpl.getCurrent();
-        Optional<RoleEntity> adminRole = old.getRoles().stream()
-                .filter(roleEntity -> roleEntity.getName().equals("ROLE_ADMIN"))
-                .findAny();
-        if (old.getLogin().equals(clientDTO.getLogin())) {
-            log.info("update client");
-            old.setLogin(clientDTO.getNewLogin());
-            return ResponseEntity.ok(clientServiceImpl.save(old));
-        } else if (adminRole.get().getName().equals("ROLE_ADMIN")) {
-            log.info("admin updating client");
-            ClientEntity clientNewCredits = clientServiceImpl.findByLogin(clientDTO.getLogin());
-            clientNewCredits.setLogin(clientDTO.getNewLogin());
-            return ResponseEntity.ok(clientServiceImpl.save(clientNewCredits));
-        }
-
-        return ResponseEntity.badRequest().build();
+        return clientServiceImpl.update(clientDTO);
     }
 
     @GetMapping("/current")

@@ -64,11 +64,11 @@ public class PizzaServiceImpl implements PizzaService {
 
     @Override
     @Transactional
-    public PizzaEntity updatePizza(PizzaDTO pizzaDTO){
+    public PizzaEntity updatePizza(Integer id,PizzaDTO pizzaDTO){
         PizzaEntity pizzaEntity = new PizzaEntity();
         pizzaEntity.setName(pizzaDTO.getName());
         pizzaEntity.setPrice(pizzaDTO.getPrice());
-        pizzaEntity.setId(pizzaDTO.getId());
+        pizzaEntity.setId(id);
         return pizzaEntityRepository.save(pizzaEntity);
     }
 

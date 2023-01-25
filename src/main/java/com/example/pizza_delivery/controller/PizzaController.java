@@ -53,8 +53,8 @@ public class PizzaController {
     @PutMapping("/update/{id}")
     public PizzaEntity updatePizza(@PathVariable Integer id, @RequestBody PizzaDTO pizzaDTO) {
         log.info("update pizza");
-        pizzaDTO.setId(id);
-        return pizzaServiceImpl.updatePizza(pizzaDTO);
+
+        return pizzaServiceImpl.updatePizza(id,pizzaDTO);
     }
 
 }

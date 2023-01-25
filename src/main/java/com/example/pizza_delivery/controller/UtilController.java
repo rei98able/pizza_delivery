@@ -20,18 +20,14 @@ import java.util.List;
 @Slf4j
 @RequestMapping("/api/util")
 public class UtilController {
-    private final ClientServiceImpl clientServiceImpl;
+
     private final ExcelCreatorImpl excelCreatorImpl;
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/result")
     public ResponseEntity<String> test()
     {
         log.info("result");
-        SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy(HH:mm:ss)");
-        Date date = new Date();
-        String fileName = "Отчет " + formatter.format(date) + ".xlsx";
-        List<ClientEntity> clientEntities = clientServiceImpl.getAll();
-        return ResponseEntity.ok(excelCreatorImpl.createExcel(fileName, clientEntities));
+        return ResponseEntity.ok(excelCreatorImpl.createExcel());
     }
 }
 
