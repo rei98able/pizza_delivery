@@ -2,6 +2,7 @@ package com.example.pizza_delivery.service;
 
 import com.example.pizza_delivery.dto.ZakazDTO;
 import com.example.pizza_delivery.model.ZakazEntity;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

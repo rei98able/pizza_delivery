@@ -25,7 +25,7 @@ import java.util.List;
 public class ZakazServiceImpl implements ZakazService {
     private final ZakazEntityRepository zakazEntityRepository;
     private final ClientEntityRepository clientEntityRepository;
-    private final ClientServiceImpl clientServiceImpl;
+    private final ClientService clientServiceImpl;
     private final PizzaServiceImpl pizzaServiceImpl;
     private final EmailServiceImpl emailService;
 
@@ -70,6 +70,7 @@ public class ZakazServiceImpl implements ZakazService {
     @Transactional
     public ZakazEntity newOrder(ZakazDTO zakazDTO) {
         ClientEntity clientEntity = clientServiceImpl.getCurrent();
+        System.out.println(clientEntity);
         if(
                 clientEntity.getRoles().stream()
                 .anyMatch(roleEntity -> roleEntity.getName().contains("ROLE_ADMIN"))

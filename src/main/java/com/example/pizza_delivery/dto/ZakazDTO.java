@@ -15,6 +15,7 @@ public class ZakazDTO {
     @NotBlank
     private String login;
     private String status;
+    @NotBlank
     private List<String> pizzaName;
 
 }

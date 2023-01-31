@@ -27,7 +27,7 @@ public class ZakazController {
     private final ClientServiceImpl clientServiceImpl;
     private final IngredientServiceImpl ingredientServiceImpl;
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')")
     @GetMapping("/getall")
     public ResponseEntity<?> getAll() {
         return ResponseEntity.ok(zakazServiceImpl.getAll());

@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by ogbozoyan at 13.01.2023
@@ -154,6 +155,15 @@ public class ClientServiceImpl implements ClientService {
             return ResponseEntity.ok(save(clientNewCredits));
         }
         return ResponseEntity.badRequest().build();
+    }
+
+    @Override
+    public List<ClientEntity> findByRole(String role) {
+        List<ClientEntity> empl = clientEntityRepository.findAll().stream()
+                .filter(clientEntity -> clientEntity.getRoles().stream()
+                        .anyMatch(roleEntity -> roleEntity.getName().equals(role)))
+                .collect(Collectors.toList());
+        return empl;
     }
 
 }

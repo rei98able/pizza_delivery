@@ -20,4 +20,5 @@ public interface ClientEntityRepository extends JpaRepository<ClientEntity, Inte
     Boolean existsByLogin(String login);
 
     void deleteByLogin(String login);
+    List<ClientEntity> findAllByRoles(String role);
 }

@@ -62,4 +62,11 @@ public class ClientController {
     public ResponseEntity<ClientEntity> getCurrentUser() {
         return ResponseEntity.ok(clientServiceImpl.getCurrent());
     }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')")
+    @GetMapping("/getEmployee")
+    @ResponseBody
+    public ResponseEntity<List<ClientEntity>> getEmployee() {
+        return ResponseEntity.ok(clientServiceImpl.findByRole("ROLE_EMPLOYEE"));
+    }
 }

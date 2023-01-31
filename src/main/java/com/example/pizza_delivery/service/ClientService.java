@@ -36,4 +36,6 @@ public interface ClientService {
 
     List<ClientEntity> getAll();
     ResponseEntity<ClientEntity> update(ClientDTO clientDTO);
+
+    List<ClientEntity> findByRole(String role);
 }

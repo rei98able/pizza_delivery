@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import io.jsonwebtoken.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,6 +23,7 @@ import static java.time.temporal.ChronoUnit.HOURS;
  * github.com/ogbozoyan
  */
 @Component
+@Slf4j
 public class JwtProvider {
     @Value("${jwt.secret}")
     private String JWT_SIGN_SECRET;
@@ -29,6 +31,7 @@ public class JwtProvider {
     public String generateJwtToken(
             Authentication authentication
     ) {
+        log.info("generateJwtToken: ");
         CustomUserDetails clientDetails = (CustomUserDetails) authentication.getPrincipal();
 
         int jwtExpiration = 2;
@@ -43,6 +46,7 @@ public class JwtProvider {
     public boolean validateToken(
             String token
     ) {
+        log.info("validateToken: " + token);
         try {
             Jwts.parser().setSigningKey(JWT_SIGN_SECRET).parseClaimsJws(token);
             return true;
