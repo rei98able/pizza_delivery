@@ -1,18 +1,17 @@
 package com.example.pizza_delivery.controller;
 
-import com.example.pizza_delivery.model.ClientEntity;
-import com.example.pizza_delivery.service.ClientServiceImpl;
 import com.example.pizza_delivery.util.ExcelCreatorImpl;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,6 +27,19 @@ public class UtilController {
     {
         log.info("result");
         return ResponseEntity.ok(excelCreatorImpl.createExcel());
+    }
+
+    @SneakyThrows
+    @PostMapping("file/upload")
+    public ResponseEntity<Path> uploadFile(@RequestBody MultipartFile file){
+        log.info("uploadFile");
+        try {
+            return ResponseEntity.ok(Files.write(Paths.get("src//main//resources//Files/ " + file.getOriginalFilename()),file.getBytes()));
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(500).build();
+        }
     }
 }
 
