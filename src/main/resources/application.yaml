@@ -1,1 +1,66 @@
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: finnsordelka
+    password: fdjidwwisenbkpuk
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+  security:
+    basic:
+      enabled: false
+  server:
+    address: 192.168.88.128
+  main:
+    allow-circular-references: true
+  jpa:
+    database: POSTGRESQL
+    show-sql: false
 
+  datasource:
+    url: jdbc:postgresql://localhost:5432/pizzaDB
+    username: pizzaRoot
+    password: pizzaRootPass
+    driverClassName: org.postgresql.Driver
+  app:
+    name: PizzaApp
+    version: 1.0.0
+    description: PizzaApp
+    api:
+      version: 1.0.0
+      description: PizzaApp
+      title: PizzaApp
+      contact:
+        name: PizzaApp
+        author: ogbozoyan
+        email: oganes.bozoyan@mail.ru
+        swager:
+          enabled: true
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+  sql:
+    init:
+      platform: postgres
+camunda:
+  bpm:
+    default-serialization-format: application/json
+    admin-user:
+      id: admin
+      password: admin
+    job-execution:
+      enabled: true
+      max-jobs-per-acquisition: 5
+      max-pool-size: 20
+    id-generator: simple
+    generic-properties:
+      properties:
+        historyCleanupBatchWindowStartTime: "01:00"
+        historyCleanupBatchWindowEndTime: "09:00"
+        historyCleanupStrategy: endTimeBased
+
+jwt:
+  secret: tokenSecret
