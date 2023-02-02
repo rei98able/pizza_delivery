@@ -31,10 +31,11 @@ public class UtilController {
 
     @SneakyThrows
     @PostMapping("file/upload")
-    public ResponseEntity<Path> uploadFile(@RequestBody MultipartFile file){
+    public ResponseEntity<String> uploadFile(@RequestBody MultipartFile file){
         log.info("uploadFile");
         try {
-            return ResponseEntity.ok(Files.write(Paths.get("src//main//resources//Files/ " + file.getOriginalFilename()),file.getBytes()));
+            Files.write(Paths.get("src//main//resources//Files/ " + file.getOriginalFilename()),file.getBytes());
+            return ResponseEntity.ok("done");
         }
         catch (Exception e){
             e.printStackTrace();
