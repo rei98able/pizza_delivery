@@ -1,0 +1,573 @@
+{
+	"info": {
+		"_postman_id": "774176b6-5c31-40b5-80b6-4e210d061c5a",
+		"name": "Pizza",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24833170"
+	},
+	"item": [
+		{
+			"name": "LoginAdmin",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY3NDEyMjE4MywiZXhwIjozNjAxNjc0MTIyMTgzfQ.FVvrGli10zKa9JWkuBZqRgmKHiRw_iADXU2-X2I5Vx96p-1xzJbc0zZZE9Ob6_qAllQa8KfipJDya4Z29JTqxA",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"login\":\"admin\",\n    \"password\":\"adminadmin\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/api/auth/signin",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LoginUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"login\":\"oganes\",\n    \"password\":\"oganesoganes\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/auth/signin",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCurrentClient",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/client/current",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"client",
+						"current"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "IngredientGET",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/ingredient/availableingredient",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"ingredient",
+						"availableingredient"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "IngredientADD",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"label\": \"Сыр\",\n  \"value\": \"cheese\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/ingredient/add",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"ingredient",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "IngredientDelete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/ingredient/delete/9",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"ingredient",
+						"delete",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "IngredientUpdate",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"label\":\"Лук\",\n    \"value\":\"Onion\",\n    \"newLabel\":\"ЛучОК\",\n    \"newValue\":\"onion\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/ingredient/update",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"ingredient",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PizzaGET",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/pizza/all",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pizza",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PizzaADD",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"ingredients\": [\n    {\n        \"label\": \"Лук\",\n        \"value\": \"Onion\"\n    },\n    {\n        \"label\":\"Сыр\",\n        \"value\":\"cheese\"\n    }\n  ],\n  \"name\": \"сырно-луковая\",\n  \"price\": 100\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/pizza/new",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pizza",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PizzaDelete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/pizza/delete/{{id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pizza",
+						"delete",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ClientGETALL",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/client/getAll",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"client",
+						"getAll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ClientGETbyID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/client/getById/16",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"client",
+						"getById",
+						"16"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ClientDeleteById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/client/delete/21",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"client",
+						"delete",
+						"21"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ClientCreate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"login\":\"userPostman\",\n    \"email\":\"userpostman@post.man\",\n    \"password\":\"useruser\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/client/create",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"client",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ClientUpdate",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"login\":\"newLoginUserPostaman\",\n    \"newLogin\":\"userPostman\",\n    \"password\":\"useruser\",\n    \"newPassword\":\"useruser\"\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/client/update",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"client",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ZakazGet",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/order/getall",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"order",
+						"getall"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ZakazNew",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\n{\n  \"address\": \"address\",\n  \"login\": \"oganes\",\n  \"name\": \"Admin Adminov Adminovich\",\n  \"pizzaName\": [\n    \n    \"сырно-луковая\",\n    \"не-существует-не-добавится\"\n  ],\n  \"status\": \"Cooking\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/order/new",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"order",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ZakazDeleteById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/order/delete/27",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"order",
+						"delete",
+						"27"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateExcel",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/util/result",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"util",
+						"result"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetEmpl",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/client/getEmployee",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"client",
+						"getEmployee"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY3NTE2NDU3MywiZXhwIjoxNjc1MTcxNzczfQ.6xK7uiNjOGzlnjmNtammD1OoDZHTYQJ5RKtsCapIdHqsug4wqyVyuiEK1FkPwn9soYjpoz1S4n0Tcn_L8q2EPw",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "tokenADMIN",
+			"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY3NDIxNTMzMiwiZXhwIjozNjAxNjc0MjE1MzMyfQ.DvnGnzzRhW4jz3MpUZhgnwcGTOiIzbPyg-fLcM_B-8MNdvTOa3DJ4Rt2sOkQvaScLcEwuNpS5sp4UC5jW817IQ",
+			"disabled": true
+		},
+		{
+			"key": "tokenUSER",
+			"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiaWF0IjoxNjc0MTMxNzk2LCJleHAiOjM2MDE2NzQxMzE3OTZ9.KedPg2yRDPdxEQGYBdzK-z0anQdTr8cCQiFdY30uOyGeh7H2Wnyrqv6ZDrB0kXZ9Hj6wgZ6UVK1eOOTHmfHShQ",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY3NDIxNjY2NCwiZXhwIjozNjAxNjc0MjE2NjY0fQ.KuDArsnfjGINGD8r2jeelPlgQTj7HC8lnLb14Nkjpgips33vvP9H6dCszzGelftCgf26gtJ83_f-DD9MlVZn8A",
+			"type": "string"
+		}
+	]
+}
